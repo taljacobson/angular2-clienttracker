@@ -37,6 +37,27 @@ export class GroupService {
     })
   }
 
+  getGroup(id){
+    let editRef = new Firebase(this.firebaseUrl+'groups/'+id);
+    var self = this;
+    editRef.on("value", function(snapshot){
+      self.group = {
+        id: snapshot.key(),
+        name: snapshot.val().name
+      }
+    })
+    return self.group
+  }
+
+  editGroup(newGroup){
+    let updateRef = new Firebase(this.firebaseUrl+'groups/'+newGroup.id);
+    updateRef.update( {
+        name: newGroup.name
+      }
+    )
+    return
+  }
+
   deleteGroup(id){
     let delRef = new Firebase(this.firebaseUrl + "groups/" + id )
     delRef.remove();

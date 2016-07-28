@@ -22,7 +22,7 @@ import { Router, ROUTER_DIRECTIVES, RouterConfig, Params } from "@angular/router
           <td>{{group.id}}</td>
           <td>{{ group.name}}</td>
           <td>
-             <a (click)="goToGroupEdit(group.id)" class="w3-btn w3-green">edit</a>
+             <button (click)="goToGroupEdit(group.id)" class="w3-btn w3-green">edit</button>
               <button (click)="deleteGroup(group.id)" class="w3-btn w3-red">delete</button>
            </td>
         </tr>

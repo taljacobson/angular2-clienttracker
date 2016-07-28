@@ -37,5 +37,10 @@ export class GroupService {
     })
   }
 
+  deleteGroup(id){
+    let delRef = new Firebase(this.firebaseUrl + "groups/" + id )
+    delRef.remove();
+  }
+
 
 }

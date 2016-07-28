@@ -45,13 +45,19 @@ export class GroupListComponent implements OnInit, OnDestroy {
   }
 
   deleteGroup(Groupid){
-
+    this.groups.forEach((g, index) => {
+      if(g.id == Groupid){
+        this.groups.splice(index, 1)
+      }
+    })
+    this._groupService.deleteGroup(Groupid)
   }
 
   ngOnInit(){
     this.subscription = this._groupService.getGroups().subscribe(group => {
       this.groups.push(group)
-    })
+    });
+
   }
 
   ngOnDestroy(){

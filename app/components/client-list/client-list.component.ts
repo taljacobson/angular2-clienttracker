@@ -20,7 +20,7 @@ import { Router, ROUTER_DIRECTIVES, RouterConfig, Params } from "@angular/router
           <th></th>
         </tr>
         <tr *ngFor="let client of clients ">
-          <td><a href="#" routerLink="details/{{client.id }} ">{{ client.firstName}} {{client.lastName}}</a></td>
+          <td (click)="gotTodeteils(client.id)">{{ client.firstName}} {{client.lastName}}</td>
           <td>{{client.email}}</td>
           <td>{{client.phone}}</td>
           <td>
@@ -45,8 +45,17 @@ export class ClientListComponent implements OnInit, OnDestroy {
     this.router.navigate(['client/edit', clientid]);
   }
 
-  deleteClient(clientid){
+  gotTodeteils(clientid) {
+    this.router.navigate(['client/details', clientid]);
+  }
 
+  deleteClient(clientid){
+    this.clients.forEach((g, index) => {
+      if(g.id == clientid){
+        this.clients.splice(index, 1)
+      }
+    })
+    this._ClientService.deleteClient(clientid)
   }
 
   ngOnInit(){

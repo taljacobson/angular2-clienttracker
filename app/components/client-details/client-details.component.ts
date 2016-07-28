@@ -1,4 +1,4 @@
-import { Component , OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import { Client } from "../client.model";
 import { ClientService } from "../../services/client.service";
 
@@ -13,7 +13,7 @@ import { Router, ROUTER_DIRECTIVES, RouterConfig, Params , ActivatedRoute } from
     <div class="w3-row">
       <ul class="w3-ul w3-border">
         <li>
-          <h2>{{client.firstName}} {{client.lastName}} <a [routerLink]="['client/edit', client.id]" class="w3-btn light-grey w3-tiny">edit</a></h2>
+          <h2>{{client.firstName}} {{client.lastName}} <a [routerLink]="['client/edit']" class="w3-btn light-grey w3-tiny">edit</a></h2>
         </li>
         <li>{{ client.group }}</li>
         <li>{{ client.email }}</li>
@@ -26,7 +26,7 @@ import { Router, ROUTER_DIRECTIVES, RouterConfig, Params , ActivatedRoute } from
     </div>
     `
 })
-export class ClientDetailsComponent implements OnInit {
+export class ClientDetailsComponent {
   private id;
   private client;
 
@@ -35,18 +35,11 @@ export class ClientDetailsComponent implements OnInit {
     private _clientService: ClientService,
     private router: Router
   ){
-      // this.id = route.get('id');
-      // this.client = this._clientService.getClients(this.id)
-  }
+    this.id = this.route.snapshot.params['id']
+    console.log(this.id)
+    this.client = this._clientService.getClient(this.id)
+    console.log(this.client)
 
-  ngOnInit() {
-    this.route.params
-      .map(params => params['id'])
-      .subscribe((id) => {
-        this._clientService
-          .getClient(id)
-          .subscribe(client => this.client = client);
-      });
   }
 
 }

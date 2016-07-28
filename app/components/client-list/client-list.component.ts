@@ -20,7 +20,7 @@ import { Router, ROUTER_DIRECTIVES, RouterConfig, Params } from "@angular/router
           <th></th>
         </tr>
         <tr *ngFor="let client of clients ">
-          <td><a routerLink="details/{{client.id }} ">{{ client.firstName}} {{client.lastName}}</a></td>
+          <td><a href="#" routerLink="details/{{client.id }} ">{{ client.firstName}} {{client.lastName}}</a></td>
           <td>{{client.email}}</td>
           <td>{{client.phone}}</td>
           <td>
@@ -56,6 +56,6 @@ export class ClientListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
 }

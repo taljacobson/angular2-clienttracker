@@ -67,22 +67,22 @@ export class ClientService {
   }
 
   getClient(id){
-    let editRef = new Firebase(this.firebaseUrl + 'clients/'+id);
-
-    editRef.on('value', (snapshot) => {
-      this.client = {
+    let editRef = new Firebase(this.firebaseUrl+'client/'+id);
+    var self = this;
+    editRef.on("value", function(snapshot){
+      self.client = {
         id: snapshot.key(),
-        firstName :snapshot.val().firstName,
-        lastName :snapshot.val().lastName,
-        group :snapshot.val().group,
-        email :snapshot.val().email,
-        phone :snapshot.val().phone,
-        address :snapshot.val().address,
-        city :snapshot.val().city,
-        country :snapshot.val().country,
-        zipCode :snapshot.val().zipCode
+        firstName: snapshot.val().firstName,
+        lastName: snapshot.val().lastName,
+        group: snapshot.val().group,
+        email: snapshot.val().email,
+        phone: snapshot.val().phone,
+        address: snapshot.val().address,
+        city: snapshot.val().city,
+        state: snapshot.val().state,
+        zipcode: snapshot.val().zipcode
       }
     });
-    return this.client;
+    return self.client;
   }
 }

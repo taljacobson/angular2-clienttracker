@@ -85,4 +85,9 @@ export class ClientService {
     });
     return self.client;
   }
+
+  deleteClient(id){
+    let delRef = new Firebase(this.firebaseUrl + "client/" + id )
+    delRef.remove();
+  }
 }

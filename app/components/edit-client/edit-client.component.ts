@@ -5,6 +5,8 @@ import { Subscription } from "rxjs/subscription";
 import { Client } from "../client.model";
 import { ClientService } from "../../services/client.service";
 
+
+
 @Component({
     selector: 'edit-client',
     directives: [FORM_DIRECTIVES , ROUTER_DIRECTIVES ],
@@ -115,7 +117,7 @@ export class EditClientComponent implements OnInit, OnDestroy {
     }
     this._clientService.editClient(this.newClient);
     this.newClient = {};
-    this.router.navigateByUrl('client');
+    this.router.navigate(['client']);
   }
 
   ngOnInit(){

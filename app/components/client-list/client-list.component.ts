@@ -4,13 +4,17 @@ import { ClientService } from "../../services/client.service";
 
 import { Subscription} from "rxjs/subscription";
 import { Router, ROUTER_DIRECTIVES, RouterConfig, Params } from "@angular/router";
-
+import { filterArrayPipe } from "../../pipes/filter.pipe";
 
 @Component({
     selector: 'client-list',
     directives: [ ROUTER_DIRECTIVES ],
+    pipes: [ filterArrayPipe ],
     template: `
     <h2> clients</h2>
+    <form>
+      <input class="w3-input" type="text" [(ngModel)]="searchText" placeholder="search clients">
+    </form>
     <div *ngIf="clients">
       <table class="w3-table w3-bordered w3-striped">
         <tr>
@@ -19,7 +23,7 @@ import { Router, ROUTER_DIRECTIVES, RouterConfig, Params } from "@angular/router
           <th>phone</th>
           <th></th>
         </tr>
-        <tr *ngFor="let client of clients ">
+        <tr *ngFor="let client of clients | filter : searchText  ">
           <td (click)="gotTodeteils(client.id)">{{ client.firstName}} {{client.lastName}}</td>
           <td>{{client.email}}</td>
           <td>{{client.phone}}</td>
@@ -36,6 +40,7 @@ export class ClientListComponent implements OnInit, OnDestroy {
 
   public clients: Client[] = [];
   public subscription;
+  searchText:string = '';
 
   constructor(private _ClientService: ClientService, private router:Router ){
 

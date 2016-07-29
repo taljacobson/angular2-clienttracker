@@ -79,11 +79,28 @@ export class ClientService {
         phone: snapshot.val().phone,
         address: snapshot.val().address,
         city: snapshot.val().city,
-        state: snapshot.val().state,
-        zipcode: snapshot.val().zipcode
+        country: snapshot.val().country,
+        zipCode: snapshot.val().zipCode
       }
     });
     return self.client;
+  }
+
+  editClient(newClient): void{
+    let updateRef = new Firebase(this.firebaseUrl+'client/'+newClient.id);
+    updateRef.update( {
+      firstName: newClient.firstName,
+      lastName: newClient.lastName,
+      group: newClient.group,
+      email: newClient.email,
+      phone: newClient.phone,
+      address: newClient.address,
+      city: newClient.city,
+      country: newClient.country,
+      zipCode: newClient.zipCode
+      }
+    )
+    return
   }
 
   deleteClient(id){

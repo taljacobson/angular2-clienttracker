@@ -13,7 +13,7 @@ import { Router, ROUTER_DIRECTIVES, RouterConfig, Params , ActivatedRoute } from
     <div class="w3-row">
       <ul class="w3-ul w3-border">
         <li>
-          <h2>{{client.firstName}} {{client.lastName}} <a [routerLink]="['client/edit']" class="w3-btn light-grey w3-tiny">edit</a></h2>
+          <h2>{{client.firstName}} {{client.lastName}} <a (click)=goToEdit(client.id) [routerLink]="['/client/edit', client.id ]" class="w3-btn light-grey w3-tiny">edit</a></h2>
         </li>
         <li>{{ client.group }}</li>
         <li>{{ client.email }}</li>
@@ -26,7 +26,7 @@ import { Router, ROUTER_DIRECTIVES, RouterConfig, Params , ActivatedRoute } from
     </div>
     `
 })
-export class ClientDetailsComponent {
+export class ClientDetailsComponent  {
   private id;
   private client;
 
@@ -41,5 +41,11 @@ export class ClientDetailsComponent {
     console.log(this.client)
 
   }
+
+  goToEdit(id){
+    console.log(id);
+  }
+
+
 
 }
